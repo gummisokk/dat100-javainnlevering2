@@ -1,7 +1,5 @@
 package no.hvl.dat100.tabeller;
 
-import java.util.Arrays;
-
 public class Tabeller {
 
 	// a)
@@ -21,11 +19,16 @@ public class Tabeller {
 	}
 	
 	public static String tilStreng(int[] tabell) {
-		if (tabell == null || tabell.length ==0) {
-			return "[]";
+		String ret = "[";
+		for (int i = 0; i < tabell.length; i++){
+			ret += tabell[i];
+			if (i != tabell.length-1){
+				ret+= ",";
+			}
 		}
-		return Arrays.toString(tabell);
-}
+		ret += "]"; 
+		return ret;
+	}
 
 	// c)
 	public static void summer(String[] args) {
@@ -33,6 +36,7 @@ public class Tabeller {
 		int sum =summer(tabell);
 		System.out.print("Summen er:" + sum);
 	}
+
 	public static int summer(int[] tabell) {
 		int sum =0;
 		for (int tall : tabell) {
@@ -106,20 +110,28 @@ public class Tabeller {
 	}
 	
 	public static boolean erSortert(int[] tabell) {
-		for (int i = 1; i < tabell.length; i++) {
-			return false;
+		int forrigeTal = Integer.MIN_VALUE;
+		for (int element : tabell){
+			if (element < forrigeTal) {
+				return false;
+			}
+			forrigeTal = element;
 		}
-	}
-	return true; {
-		
+		return true;
 	}
 
 	
 	// h)
 	public static int[] settSammen(int[] tabell1, int[] tabell2) {
+		int[] nyTabell = new int[tabell1.length + tabell2.length];
+		
+		for (int i = 0; i < tabell1.length; i++) {
+			nyTabell[i] = tabell1[i];
+		}
+		for (int i = 0; i < tabell2.length; i++) {
+			nyTabell[tabell1.length + i] = tabell2[i];
+		}
 
-		// TODO
-		throw new UnsupportedOperationException("Metoden settSammen ikke implementert");
-
+		return nyTabell;
 	}
 }
