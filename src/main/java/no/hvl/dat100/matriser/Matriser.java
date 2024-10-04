@@ -4,48 +4,53 @@ public class Matriser {
 
 	// a)
 	public static void skrivUt(int[][] matrise) {
-		System.out.print(tilStreng(matrise));
+		for(int[] rad : matrise) {
+			for (int rekke : rad) {
+				System.out.println(rekke);
+				}
+			}
+				
+				
 	}
 
 	// b)
 	public static String tilStreng(int[][] matrise) {
-		String ret = "";
-		for(int[] tabell : matrise){
-			for(int element : tabell)
-			{
-				ret += element + " ";
+		String svar = "";
+		for(int[] rad : matrise) {
+			for (int rekke : rad) {
+				svar += rekke+" ";
+				}
+			svar += "\n";
 			}
-			ret += "\n";
-		}
-		return ret;
+		return svar;
 	}
 
 	// c)
 	public static int[][] skaler(int tall, int[][] matrise) {
-		int[][] nyMatrise = matrise.clone();
-		for (int i = 0; i < nyMatrise.length; i++) {
-			for (int j = 0; j < nyMatrise[i].length; j++) {
-				nyMatrise[i][j] *= tall;
+		int[][] bedreMatrise = new int[matrise.length][matrise[0].length];
+		for(int a = 0; a < matrise.length; a++) {
+			for (int b = 0; b < matrise[a].length; b++) {
+				bedreMatrise[a][b] = matrise[a][b]*tall;
+				}
 			}
-		}
-		return nyMatrise;
+		return bedreMatrise;
 	}
 
 	// d)
 	public static boolean erLik(int[][] a, int[][] b) {
-		if (a.length != b.length){
+		if(a.length != b.length) {
 			return false;
 		}
-
-		for (int i = 0; i < a.length; i++) {
-			if (a[i].length != b[i].length){
+		for (int f = 0; f < a.length; f++) {
+			if(a[f].length != b[f].length) {
 				return false;
 			}
-			for (int j = 0; j < a[i].length; j++) {
-				if (a[i][j] != b[i][j]){
+		}
+		for(int f = 0; f < a.length; f++) {
+			for (int s = 0; s < a[f].length; s++) {
+				if (a[f][s] != b[f][s]) {
 					return false;
 				}
-				
 			}
 		}
 		return true;
@@ -53,33 +58,30 @@ public class Matriser {
 	
 	// e)
 	public static int[][] speile(int[][] matrise) {
-		int[][] nyMatrise = new int[matrise.length][matrise[0].length];
-
-		for (int i = 0; i < matrise.length; i++) {
-			for (int j = 0; j < matrise[0].length; j++) {
-				nyMatrise[i][j] = matrise[j][i];
+		int[][]speilMatrise = new int[matrise.length][matrise[0].length];
+		for (int a = 0; a < matrise.length; a++) {
+			for (int b = 0; b < matrise[a].length; b++) {
+				speilMatrise[a][b] = matrise[b][a];
 			}
 		}
-		return nyMatrise;
+		return speilMatrise;
 	}
 
 	// f)
 	public static int[][] multipliser(int[][] a, int[][] b) {
-
-		int[][] nyMatrise = new int[a.length][b[0].length];
-
-		for (int i = 0; i < nyMatrise.length; i++) {
-			for (int j = 0; j < nyMatrise[0].length; j++) {
-				
-				int val = 0;
-
-				for (int k = 0; k < b.length; k++){
-					val += a[i][k] * b[k][j];
+		int aRekke = a.length;
+		int felles = a[0].length;
+		int bRekke = b.length;
+		
+		int[][] multiMatris = new int [aRekke][bRekke];
+		
+		for (int f = 0; f < aRekke; f++) {
+			for (int s = 0; s < bRekke; s++) {
+				for (int t = 0; t < felles; t++) {
+					multiMatris[f][s] += (a[f][t]*b[t][s]);
 				}
-				nyMatrise[i][j] = val;
 			}
 		}
-		
-		return nyMatrise;
+		return multiMatris;
 	}
 }
